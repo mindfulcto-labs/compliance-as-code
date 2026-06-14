@@ -111,15 +111,9 @@ The pattern is the same: emit `Evidence` records at the points where your applic
 
 Run `aigov aibom emit` on every release and attach the result as a release artefact. The SPDX 3.0 file is small, stable, and unambiguous.
 
-## What this proves
+## Who this is for
 
-Sites this is written for: UK and EU teams who need to demonstrate ISO 42001 readiness or EU AI Act conformity without buying a SaaS dashboard. The CLI + YAML library + AIBOM emitter is enough to ship.
-
-For my CV, this repo backs:
-
-- **"AI Governance, Responsible AI, AI Ethics swimlane"** — the YAML control corpus and the cross-map are the artefact.
-- **"ISO/IEC 42001 (AI Management Systems) Lead Auditor (in progress)"** — the controls and the evidence schema are the lens I'm reading 42001 through.
-- **"ISACA CGEIT, CRISC, CISM (exams passed July 2025)"** — the governance/risk/security control vocabulary used in the schema.
+UK and EU teams who need to demonstrate ISO 42001 readiness or EU AI Act conformity without buying a SaaS dashboard. The CLI + YAML library + AIBOM emitter is enough to ship a starter pack you can show your auditor next quarter.
 
 ## Limitations
 
