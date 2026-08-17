@@ -140,6 +140,14 @@ Long-form essays at [themindfulcto.com](https://themindfulcto.com):
 - _EU AI Act Article 12 in practice: what regulators will look at, and what they will not._
 - _The AIBOM. Why SPDX 3.0 won the format war and what that means for your release pipeline._
 
+## Related projects
+
+- [`aidlc`](https://github.com/mindfulcto-labs/aidlc): AI-driven development lifecycle playbooks.
+- [`engineering-standards`](https://github.com/mindfulcto-labs/engineering-standards): engineering standards and checklists.
+- [`agentic-harness`](https://github.com/mindfulcto-labs/agentic-harness): a runtime harness pattern for agentic systems.
+- [`apiloom-ce`](https://github.com/mindfulcto-labs/apiloom-ce): open-source API management platform.
+- [`awesome-ai-governance`](https://github.com/mindfulcto-labs/awesome-ai-governance): curated AI governance list.
+
 ## License
 
 [Apache License 2.0](LICENSE).
