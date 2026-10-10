@@ -9,12 +9,12 @@ A small Python package + CLI that gives you four things:
 
 1. **A YAML control library.** Every ISO/IEC 42001:2023 Annex A control, expressed as a structured YAML file with cross-references into EU AI Act Articles, NIST AI RMF, UK AI Cyber Code, and OWASP LLM Top 10. Look one up by id, list them by framework, walk the cross-map both directions.
 2. **An evidence schema.** Pydantic-typed records that link runtime events (audit log entries, attestation records, model releases, policy decisions) back to the controls they satisfy. Drop your `agentic-harness` audit-log entries through it and you have machine-readable conformity evidence.
-3. **An SPDX 3.0 AI Profile emitter.** Render an AI system definition (`system.yaml`) into a valid SPDX 3.0 AIBOM you can attach to a release. Models, datasets, training method, intended use, out-of-scope use, evaluation references — all in one file your auditor will recognise.
+3. **An SPDX 3.0 AI Profile emitter.** Render an AI system definition (`system.yaml`) into a valid SPDX 3.0 AIBOM you can attach to a release. Models, datasets, training method, intended use, out-of-scope use and evaluation references, all in one file your auditor will recognise.
 4. **A CLI scaffolder.** `aigov init my-system` lays out a starter pack so you can stop staring at the ISO 42001 PDF and start filling in fields.
 
 ## Why this exists
 
-The AI governance tooling market in 2026 is dominated by SaaS. Credo AI, IBM watsonx.governance, Microsoft Purview AI Hub, Holistic AI, Modulos — pick your vendor, sign your contract, get a dashboard. That's fine if you have the budget and the buying cycle. It's not fine if you are a CTO who wants to be able to inspect, fork, and version-control your governance.
+The AI governance tooling market in 2026 is dominated by SaaS. Credo AI, IBM watsonx.governance, Microsoft Purview AI Hub, Holistic AI, Modulos. Pick your vendor, sign your contract, get a dashboard. That's fine if you have the budget and the buying cycle. It's not fine if you are a CTO who wants to be able to inspect, fork, and version-control your governance.
 
 This repo is for the second case. It is opinionated about three things:
 
@@ -22,18 +22,18 @@ This repo is for the second case. It is opinionated about three things:
 - **Evidence is hash-chained, not screenshots.** Your evidence corpus is only as trustworthy as the chain that links runtime to record. The schema deliberately points at the [`agentic-harness`](https://github.com/mindfulcto-labs/agentic-harness) audit log shape, which is SHA-256 hash-chained for tamper-evidence.
 - **An AIBOM is a single file, not a portal.** SPDX 3.0 added the AI Profile in late 2024. We emit a minimal, valid SPDX 3.0 JSON-LD document so you can attach it to a GitHub Release and move on.
 
-## Mapping table — the page reviewers linger on
+## Mapping table: the page reviewers linger on
 
 | ISO/IEC 42001:2023 control | EU AI Act | NIST AI RMF | What it produces |
 |---|---|---|---|
-| A.6.2.7 — AI system event logs | Article 12 (record-keeping) | MEASURE 2.4 | Hash-chained audit log entries (`agentic-harness` audit table) |
-| A.6.2.5 — Operation and monitoring | Article 15 (accuracy, robustness) | MEASURE 2.3, 2.7 | Eval run records (Langfuse / Ragas / DeepEval references) |
-| A.7.4 — Data provenance | Article 10 (data governance) | MAP 4.1 | Dataset metadata in SPDX 3.0 AIBOM |
-| A.7.6 — Data privacy | Article 10 + GDPR | GOVERN 1.6 | DPIA reference + DLP / PII redaction policy decision records |
-| A.8.1 — System documentation and information for users | Article 13 (transparency) | GOVERN 1.4 | Model card + intended use + out-of-scope use in AIBOM |
-| A.9.3 — Intended use | Article 13 + Article 9 (risk management) | MAP 1.1 | Intended use field in AIBOM + risk classification |
-| A.5 — AI system impact assessment | Article 9 (risk management) + Article 27 (FRIA) | MAP 5.1 | Impact assessment record + risk classification |
-| A.6.2.4 — AI system deployment | Article 14 (human oversight) | GOVERN 3.2 | Two-person approval records from `agentic-harness` blast-radius gate |
+| A.6.2.7: AI system event logs | Article 12 (record-keeping) | MEASURE 2.4 | Hash-chained audit log entries (`agentic-harness` audit table) |
+| A.6.2.5: Operation and monitoring | Article 15 (accuracy, robustness) | MEASURE 2.3, 2.7 | Eval run records (Langfuse / Ragas / DeepEval references) |
+| A.7.4: Data provenance | Article 10 (data governance) | MAP 4.1 | Dataset metadata in SPDX 3.0 AIBOM |
+| A.7.6: Data privacy | Article 10 + GDPR | GOVERN 1.6 | DPIA reference + DLP / PII redaction policy decision records |
+| A.8.1: System documentation and information for users | Article 13 (transparency) | GOVERN 1.4 | Model card + intended use + out-of-scope use in AIBOM |
+| A.9.3: Intended use | Article 13 + Article 9 (risk management) | MAP 1.1 | Intended use field in AIBOM + risk classification |
+| A.5: AI system impact assessment | Article 9 (risk management) + Article 27 (FRIA) | MAP 5.1 | Impact assessment record + risk classification |
+| A.6.2.4: AI system deployment | Article 14 (human oversight) | GOVERN 3.2 | Two-person approval records from `agentic-harness` blast-radius gate |
 
 Full library lives under [`controls/iso42001/`](controls/iso42001/) and [`mappings/eu-ai-act/`](mappings/eu-ai-act/). One YAML file per control. `aigov controls list` prints the lot.
 
@@ -105,7 +105,7 @@ ev = Evidence.now(
 
 ### With LangGraph / LangChain
 
-The pattern is the same: emit `Evidence` records at the points where your application takes a decision a regulator will want to inspect. The granularity is yours — typical sites emit one record per checkpointable state transition, plus one per release.
+The pattern is the same: emit `Evidence` records at the points where your application takes a decision a regulator will want to inspect. The granularity is yours. Typical sites emit one record per checkpointable state transition, plus one per release.
 
 ### With your CI/CD
 
@@ -124,9 +124,9 @@ UK and EU teams who need to demonstrate ISO 42001 readiness or EU AI Act conform
 
 ## Roadmap
 
-- **v0.2** — 38 ISO 42001 Annex A controls authored from primary sources. CycloneDX ML-BOM emitter alongside SPDX 3.0. OPA Rego policy library plug-in.
-- **v0.3** — NIST AI RMF cross-map. OWASP Agentic Top 10 cross-map. ISO 23894 (AI risk management) bridge.
-- **v0.4** — GitHub Actions templates that auto-collect evidence from MLflow and Langfuse on every CI run.
+- **v0.2**: 38 ISO 42001 Annex A controls authored from primary sources. CycloneDX ML-BOM emitter alongside SPDX 3.0. OPA Rego policy library plug-in.
+- **v0.3**: NIST AI RMF cross-map. OWASP Agentic Top 10 cross-map. ISO 23894 (AI risk management) bridge.
+- **v0.4**: GitHub Actions templates that auto-collect evidence from MLflow and Langfuse on every CI run.
 
 ## IP statement
 
